@@ -6,10 +6,10 @@ Luke Andritsch
 - Atom:
   This is our development environment. We code here
 
-- Teletype for Atom
+- Teletype for Atom:
   Allows us to share our code live and see each other type
 
-- Github account
+- Github account:
   Used to store and merge our code
 
 -------- Tutorial ---------------
