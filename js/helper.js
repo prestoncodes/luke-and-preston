@@ -13,52 +13,70 @@ function getObject(objectId) {
 }
 
 //update function
-function update() {
-  updateSprites();
+function updateGame(delta) {
+  updateSprites(delta);
 }
 
-function updateSprites() {
-  Object.keys(sprites).forEach(function(spriteID) {
-    var sprite = sprites[spriteID];
-  });
-}
-
-function render() {
+function renderGame() {
   canvasContext.clearRect(0, 0, canvas.width, canvas.height);
   drawLabels();
   drawSprites();
 }
 
-function drawLabels() {
-  Object.keys(labels).forEach(function(labelID) {
-    let label = labels[labelID];
-    drawText(label.text, label.xPos, label.yPos);
+function updateSprites(delta) {
+  Object.keys(sprites).forEach(function(spriteID) {
+    // var sprite = sprites[spriteID];
+    // console.log(sprite);
   });
 }
 
-//TEXT CONTROLS//
-function drawText(text, x, y) {
+//LABELS CONTROLS//
+function drawLabels() {
+  Object.keys(labels).forEach(function(labelID) {
+    let label = labels[labelID];
+    drawLabel(label.text, label.xPos, label.yPos);
+  });
+}
+function drawLabel(text, x, y) {
+  console.log("DRQ");
   canvasContext.font = font;
+
   canvasContext.fillText(text, x, y);
 }
 
+//SPRITE CONTROLLS//
 function drawSprites() {
   Object.keys(sprites).forEach(function(spriteID) {
     let sprite = sprites[spriteID];
-    console.log(sprite);
-    if (sprite.image.completed) {
-      drawImage(sprite.image, sprite.xPos, sprite.yPos);
+    if (sprite.image.complete) {
+      drawSprite(spriteID);
     } else {
-      console.log("waiting for load");
       sprite.image.onload = function() {
-        drawSprite(sprite.image, sprite.xPos, sprite.yPos);
-        console.log("I loaded");
+        sprites[spriteID].calculateScale(
+          sprite.image.width,
+          sprite.image.height
+        );
+        drawSprite(spriteID);
       };
     }
   });
 }
-function drawSprite(image, xPos, yPos) {
-  canvasContext.drawImage(image, xPos, yPos);
+
+function drawSprite(spriteID) {
+  let sprite = sprites[spriteID];
+  if (sprite.showBubble) {
+    drawLabel(sprite.textBubble, sprite.xPos, sprite.yPos);
+    setTimeout(function() {
+      sprites[spriteID].setBubbleSpeech(false);
+    }, sprite.speechTimerMilliseconds); // get in millseconds
+  }
+  canvasContext.drawImage(
+    sprite.image,
+    sprite.xPos,
+    sprite.yPos,
+    sprite.width,
+    sprite.height
+  );
 }
 
 // FONT CONTROLS //
@@ -74,7 +92,7 @@ function setFontName(name) {
 
 function setFont() {
   font = getFont();
-  console.log("New font loaded: " + font);
+  console.log("New " + font);
 }
 
 function getFont() {

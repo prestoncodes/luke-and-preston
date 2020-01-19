@@ -18,14 +18,27 @@ var player = new Sprite({
   id: "playerSprite",
   xPos: 100,
   yPos: 100,
+  width: 100,
+  height: 100,
   url: "images/player.png"
 });
 
-drawSprites();
+var enemy = new Sprite({
+  id: "enemySprite",
+  xPos: 200,
+  yPos: 100,
+  width: 100,
+  height: 100,
+  url: "images/enemy.png"
+});
 
 function userSubmittedText(text) {
   //text is the input from the user
   console.log("Game.js input detected: " + text);
+  player.move(150, 100);
+  player.setBubbleSpeech(true);
 }
+
+drawSprites();
 
 drawLabels();
