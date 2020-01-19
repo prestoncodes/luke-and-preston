@@ -17,8 +17,8 @@ var ammoLabel = new Label({
 var player = new Sprite({
   id: "playerSprite",
   xPos: 100,
-  yPos: 100,
-  width: 100,
+  yPos: 60,
+  width: 50,
   height: 100,
   url: "images/player.png"
 });
@@ -35,10 +35,9 @@ var enemy = new Sprite({
 function userSubmittedText(text) {
   //text is the input from the user
   console.log("Game.js input detected: " + text);
-  player.move(150, 100);
+  player.move(200, 100);
   player.setBubbleSpeech(true);
 }
 
-drawSprites();
-
-drawLabels();
+//First call to render
+renderGame();

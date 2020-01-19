@@ -19,8 +19,9 @@ function updateGame(delta) {
 
 function renderGame() {
   canvasContext.clearRect(0, 0, canvas.width, canvas.height);
-  drawLabels();
   drawSprites();
+
+  drawLabels();
 }
 
 function updateSprites(delta) {

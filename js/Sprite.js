@@ -23,12 +23,36 @@ class Sprite {
 
   calculateScale(widthActual, heightActual) {
     //TODO
-    // console.log("Real width:" + widthActual + " Real Height: " + heightActual);
+    // w        100
+    //---   =
+    // h        x
+
+    //x = (100 * h) / w
+    console.log(this.width * heightActual);
+    console.log(widthActual);
+    var scaledHeight = (this.width * heightActual) / widthActual;
+    console.log(scaledHeight);
+    this.width = this.width;
+    this.height = scaledHeight;
+
+    console.log(
+      "Real width:" +
+        widthActual +
+        " Real Height: " +
+        heightActual +
+        " Scaled Height: " +
+        this.height +
+        " Scaled Width: " +
+        this.width
+    );
+
+    console.log("DONE");
   }
 
   move(xPos, yPos) {
     this.xPos = xPos;
     this.yPos = yPos;
+    console.log(xPos);
   }
 
   setBubbleSpeech(shouldSpeak) {
